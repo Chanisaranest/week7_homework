@@ -1,1 +1,16 @@
-# your Home work
+
+pipeline {
+    agent any
+    parameters {
+        string(name: 'NAME', defaultValue: 'chanisara', description: 'Name')
+        choice(name: 'AGES', defaultValue: '21', description: 'ages')
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello from Slave ${params.NAME} of ${params.AGES}"
+                
+            }
+        }
+    }
+}
