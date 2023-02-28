@@ -9,7 +9,7 @@ pipeline {
             }
         }
 
-        stage('Tigger the Slave Jobs') {
+        stage('Trigger the Slave Jobs') {
             steps {
                 echo 'Start Trigger to send name and age to slave'
                 build job: 'slaves', parameters: [string(name: 'NAME', value: 'Alice'), string(name: 'Ages', value: '22')]
