@@ -10,9 +10,16 @@ pipeline {
         }
 
         stage('Trigger the Slave Jobs') {
+       
             steps {
+                script {
+                    def file = readFile "./nameages.txt"
+                    def lines = file.readLines()[0].split(' ')
+                    env.name = lines[0]
+                    env.ages = lines[1]
+                    }
                 echo 'Start Trigger to send name and age to slave'
-                build job: 'slaves', parameters: [string(name: 'NAME', value: 'Alice'), string(name: 'Ages', value: '26')]
+                build job: 'jenkins_slave', parameters: [string(name: 'NAME', value: "$name"), string(name: 'Ages', value: "$ages")]
             }
         }
     }
